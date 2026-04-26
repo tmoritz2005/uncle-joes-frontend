@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # uncle-joes-frontend
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -40,3 +41,6 @@ npm run dev
 ```sh
 npm run build
 ```
+=======
+# uncle-joes-frontend
+>>>>>>> 47cc3371dea221621eaee889a9ed238659c6e38d
