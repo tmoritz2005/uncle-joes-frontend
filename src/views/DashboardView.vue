@@ -1,25 +1,30 @@
 <template>
   <div>
     <div class="dashboard-header">
-      <h1>Welcome, {{ auth.member?.name }}</h1>
+      <h1>Welcome back, {{ auth.member?.name }}</h1>
       <p>{{ auth.member?.email }}</p>
     </div>
 
     <div class="points-card">
       <h2>Coffee Club Points</h2>
       <div v-if="loadingPoints" class="loading">Loading...</div>
-      <div v-else class="points-number">{{ points }} pts</div>
+      <div v-else>
+        <div class="points-number">{{ points }}</div>
+        <div class="points-label">points earned</div>
+      </div>
     </div>
 
-    <div>
-      <h2 class="page-header">Order History</h2>
+    <div style="margin-top: 2rem;">
+      <div class="page-header">
+        <h1>Order History</h1>
+      </div>
       <div v-if="loadingOrders" class="loading">Loading orders...</div>
       <div v-if="error" class="error-msg">{{ error }}</div>
       <div v-if="!loadingOrders && orders.length === 0" class="empty">No orders found.</div>
       <div v-for="order in orders" :key="order.order_id" class="order-card">
         <h3>Order #{{ order.order_id }}</h3>
         <div class="order-meta">
-          <span>{{ new Date(order.order_date).toLocaleDateString() }}</span>
+          {{ new Date(order.order_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}
         </div>
         <div class="order-items">
           <div v-for="item in order.items" :key="item.menu_item_id" class="order-item-row">

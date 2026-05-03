@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="page-header">
+    <div class="menu-hero">
+      <div class="menu-hero-bg"></div>
       <h1>Our Menu</h1>
     </div>
     <div v-if="loading" class="loading">Loading menu...</div>

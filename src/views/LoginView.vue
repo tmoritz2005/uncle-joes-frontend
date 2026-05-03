@@ -1,18 +1,21 @@
 <template>
-  <div class="login-wrapper">
-    <h1>Coffee Club Login</h1>
-    <div v-if="error" class="error-msg">{{ error }}</div>
-    <div class="form-group">
-      <label>Email</label>
-      <input v-model="email" type="email" placeholder="Enter your email" />
+  <div class="login-page">
+    <div class="login-wrapper">
+      <h1>Coffee Club</h1>
+      <p class="login-subtitle">Sign in to your account</p>
+      <div v-if="error" class="error-msg">{{ error }}</div>
+      <div class="form-group">
+        <label>Email</label>
+        <input v-model="email" type="email" placeholder="Enter your email" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input v-model="password" type="password" placeholder="Enter your password" />
+      </div>
+      <button class="login-btn" @click="login" :disabled="loading">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
     </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input v-model="password" type="password" placeholder="Enter your password" />
-    </div>
-    <button class="login-btn" @click="login" :disabled="loading">
-      {{ loading ? 'Logging in...' : 'Login' }}
-    </button>
   </div>
 </template>
 
