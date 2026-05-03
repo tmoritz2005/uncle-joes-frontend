@@ -3,18 +3,47 @@
     <div class="page-header">
       <h1>Find a Location</h1>
     </div>
-    <div class="search-bar">
-      <input v-model="search" type="text" placeholder="Search by city or state..." />
-    </div>
+
     <div v-if="loading" class="loading">Loading locations...</div>
     <div v-if="error" class="error-msg">{{ error }}</div>
+
     <div v-if="!loading">
-      <p class="location-count">{{ filteredLocations.length }} locations found</p>
-      <div class="locations-grid">
-        <div v-for="location in filteredLocations" :key="location.id" class="card">
-          <h3>{{ location.city }}, {{ location.state }}</h3>
-          <span v-if="location.drive_thru" class="badge">🚗 Drive Thru</span>
-          <span v-if="location.door_dash" class="badge">🛵 DoorDash</span>
+      <div class="search-bar">
+        <label>Select a State</label>
+        <select v-model="selectedState" @change="selectedLocation = null">
+          <option disabled value="">Choose a state...</option>
+          <option v-for="state in states" :key="state" :value="state">{{ state }}</option>
+        </select>
+      </div>
+
+      <div v-if="selectedState">
+        <div class="search-bar" style="margin-top: 1rem;">
+          <input v-model="search" type="text" placeholder="Search by city..." />
+        </div>
+        <p class="location-count">{{ filteredLocations.length }} locations in {{ selectedState }}</p>
+        <div class="locations-grid">
+          <div
+            v-for="location in filteredLocations"
+            :key="location.id"
+            class="card location-card"
+            @click="selectedLocation = selectedLocation?.id === location.id ? null : location"
+          >
+            <h3>{{ location.city }}, {{ location.state }}</h3>
+            <div>
+              <span v-if="location.drive_thru" class="badge">Drive Thru</span>
+              <span v-if="location.door_dash" class="badge">DoorDash</span>
+            </div>
+
+            <div v-if="selectedLocation?.id === location.id" class="location-detail">
+              <p v-if="location.address"><strong>Address:</strong> {{ location.address }}</p>
+              <div class="hours-grid">
+                <div v-for="day in days" :key="day.key">
+                  <span class="day-label">{{ day.label }}</span>
+                  <span>{{ formatHours(location[day.key + '_open'], location[day.key + '_close']) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -29,6 +58,18 @@ const locations = ref<any[]>([])
 const loading = ref(true)
 const error = ref('')
 const search = ref('')
+const selectedState = ref('')
+const selectedLocation = ref<any>(null)
+
+const days = [
+  { key: 'monday', label: 'Mon' },
+  { key: 'tuesday', label: 'Tue' },
+  { key: 'wednesday', label: 'Wed' },
+  { key: 'thursday', label: 'Thu' },
+  { key: 'friday', label: 'Fri' },
+  { key: 'saturday', label: 'Sat' },
+  { key: 'sunday', label: 'Sun' }
+]
 
 onMounted(async () => {
   try {
@@ -42,11 +83,23 @@ onMounted(async () => {
   }
 })
 
+const states = computed(() => [...new Set(locations.value.map((l: any) => l.state))].sort())
+
 const filteredLocations = computed(() => {
-  if (!search.value) return locations.value
-  const s = search.value.toLowerCase()
-  return locations.value.filter((l: any) =>
-    l.city.toLowerCase().includes(s) || l.state.toLowerCase().includes(s)
-  )
+  return locations.value.filter((l: any) => {
+    const matchesState = l.state === selectedState.value
+    const matchesSearch = !search.value || l.city.toLowerCase().includes(search.value.toLowerCase())
+    return matchesState && matchesSearch
+  })
 })
+
+function formatHours(open: number | null, close: number | null) {
+  if (open === null || close === null) return 'Closed'
+  const fmt = (h: number) => {
+    const period = h >= 12 ? 'PM' : 'AM'
+    const hour = h % 12 || 12
+    return `${hour}:00 ${period}`
+  }
+  return `${fmt(open)} - ${fmt(close)}`
+}
 </script>

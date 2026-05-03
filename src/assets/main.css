@@ -506,3 +506,70 @@ main {
 .remove-btn:hover {
   text-decoration: underline;
 }
+
+/* ── Location Detail ── */
+.location-card {
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.location-card:hover {
+  box-shadow: 0 4px 12px rgba(26, 58, 107, 0.15);
+}
+
+.location-detail {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e6f0;
+}
+
+.location-detail p {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #1a1a2e;
+}
+
+.hours-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 1rem;
+}
+
+.hours-grid div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #4a5568;
+}
+
+.day-label {
+  font-weight: 600;
+  color: #1a3a6b;
+}
+
+/* ── State Selector ── */
+.search-bar select {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.65rem 1rem;
+  border: 1px solid #e0e6f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: #1a1a2e;
+  outline: none;
+  transition: border 0.2s;
+  cursor: pointer;
+}
+
+.search-bar select:focus {
+  border-color: #1a3a6b;
+}
+
+.search-bar label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-bottom: 0.4rem;
+}
