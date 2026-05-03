@@ -4,6 +4,7 @@ import MenuView from '../views/MenuView.vue'
 import LocationsView from '../views/LocationsView.vue'
 import LoginView from '../views/LoginView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import CartView from '../views/CartView.vue'
 import { useAuthStore } from '../stores/auth'
 
 const router = createRouter({
@@ -13,7 +14,8 @@ const router = createRouter({
     { path: '/menu', component: MenuView },
     { path: '/locations', component: LocationsView },
     { path: '/login', component: LoginView },
-    { path: '/dashboard', component: DashboardView, meta: { requiresAuth: true } }
+    { path: '/dashboard', component: DashboardView, meta: { requiresAuth: true } },
+    { path: '/cart', component: CartView }
   ]
 })
 

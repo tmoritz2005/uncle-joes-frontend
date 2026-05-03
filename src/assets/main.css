@@ -394,3 +394,115 @@ main {
   padding: 3rem 1rem;
   font-size: 1rem;
 }
+
+/* ── Size Selector ── */
+.size-selector {
+  margin: 0.75rem 0 0.5rem;
+}
+
+.size-selector label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.size-selector select {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #e0e6f0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: #f4f6f9;
+  color: #1a1a2e;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.2s;
+}
+
+.size-selector select:focus {
+  border-color: #1a3a6b;
+}
+
+/* ── Cart ── */
+.cart-link {
+  margin-left: auto;
+  position: relative;
+  font-size: 1.2rem;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #1a3a6b;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-to-cart-btn {
+  margin-top: 0.75rem;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #1a3a6b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #15305a;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quantity-controls button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #e0e6f0;
+  background: #f4f6f9;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.quantity-controls button:hover {
+  background: #1a3a6b;
+  color: #fff;
+  border-color: #1a3a6b;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  color: #dc2626;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
